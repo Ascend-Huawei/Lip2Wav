@@ -8,6 +8,11 @@ Deliverable results for NPU training: [README_NPU](https://rnd-gitlab-ca-g.huawe
 
 **Code changes after using conversion tool:**
 
+| Observed Issue  | Code Change | 
+| --------  | ------------------- |
+| Datafeeder (feeder.py): NPU does not support tf.FIFOQueue for data buffering and queueing. | Changed to buitlin python queue implementation class:Queue for building training and evaluation queues. During training (in synthesizer/train.py) made code changes to load feed_dict from the python queue before running sess.run  | 
+| data      | Some long data here | more data             | 
+
 FIFOQueue not supported
 
 Dynamic decode 
