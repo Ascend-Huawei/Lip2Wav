@@ -1,0 +1,9 @@
+Network = LIP2WAV
+RankSize = 1
+BatchSize = 24
+DeviceType = aarch64
+CaseName = LIP2WAV_bs24_1p_perf
+ActualFPS = 22.10
+TrainingTime = 1.09
+ActualLoss = 0.96137
+E2ETrainingTime = 2987
