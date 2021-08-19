@@ -4,11 +4,9 @@ Deliverable results for GPU training: [README_GPU](https://rnd-gitlab-ca-g.huawe
 
 Deliverable results for NPU training and supporting document in folder [2_npu_training](2_npu_training)
 
-### NPU Training: ###
-
 #### Code changes after using conversion tool: ####
 
-| Observed Issue  | Code Change | 
+| Observed Issues  | Code Changes | 
 | --------  | ------------------- |
 | *Datafeeder (feeder.py):* <br/> NPU does not support tf.FIFOQueue for data buffering and queueing. | Changed to buitlin python queue implementation class::Queue for building training and evaluation queues. During training (in synthesizer/train.py) made code changes to load feed_dict based on queue size. If not empty, load the feed_dict with actual queue values else load defined placeholders before passing to sess.run  | 
 | *Dynamic decode (tacotron.py):* <br/> We observed that the tf.dynamic_deocde wrapper is not supported by NPU. Dynamic decode wrapper takes CustomDecoder as input and performs dynamic decoding at each step  | We found tf.while_loop as the replacement for tf.dynamic_decode and was supported by NPU. Implemented tf.while_loop consisting of condition and body functions. The body function outputs the next step, next inputs, outputs, final output and next state. Frames prediction and final decoder state were obtained as outputs from tf.while_loop  | 
