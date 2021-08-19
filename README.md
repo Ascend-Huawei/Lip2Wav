@@ -4,7 +4,27 @@ Deliverable results for GPU training: [README_GPU](https://rnd-gitlab-ca-g.huawe
 
 Deliverable results for NPU training and supporting document in folder [2_npu_training](2_npu_training)
 
-#### Code changes after using conversion tool: ####
+## NPU Training :
+
+### Dataset Download:
+
+To download a speaker dataset, run sh download_speaker.sh Dataset/<speaker> (replace  with one of five speaker option). Then run preprocess.py to preprocess the raw dataset. We provide a preprocessed chess dataset from our experiment, it is stored on the GPU / NPU servers. Below is the location for the NPU preprocessed chess dataset:
+
+ - Ascend NPU server (jiayansuo): 
+
+    original: `/data/lip2wav/chess`
+
+    softlnk: `/home/jiayansuo/Lip2wav_train/Lip2Wav-master_npu_20210602003231/Dataset/chess`
+
+  
+### NPU training command
+  
+```
+cd scripts
+bash run_npu_1p.sh
+```
+
+### Code changes after using conversion tool:
 
 | Observed Issues  | Code Changes | 
 | --------  | ------------------- |
