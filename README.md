@@ -9,7 +9,7 @@ Deliverable results for NPU training: [README_GPU](https://rnd-gitlab-ca-g.huawe
 
 ***Dataset Download:***
 
-Kindly refer to the [README_GPU](https://rnd-gitlab-ca-g.huawei.com/hispark/model_training_hq/-/blob/master/Lip2Wav/1_gpu_training/README_GPU.md) regarding the preprocessed dataset. For 
+Kindly refer to the [README_GPU](https://rnd-gitlab-ca-g.huawei.com/hispark/model_training_hq/-/blob/master/Lip2Wav/1_gpu_training/README_GPU.md) regarding the preprocessed dataset. Dataset location on NPU server is as follows:
 
 - Ascend NPU server (jiayansuo): 
 
