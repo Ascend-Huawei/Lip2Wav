@@ -4,22 +4,17 @@ Deliverable results for GPU training: [README_GPU](https://rnd-gitlab-ca-g.huawe
 
 Deliverable results for NPU training: [README_NPU](https://rnd-gitlab-ca-g.huawei.com/hispark/model_training_hq/-/blob/master/Lip2Wav/2_npu_training/README_GPU.md), supporting document in folder [2_npu_training](2_npu_training)
 
-**NPU Training:**
+### NPU Training: ###
 
-**Code changes after using conversion tool:**
+#### Code changes after using conversion tool: ####
 
 | Observed Issue  | Code Change | 
 | --------  | ------------------- |
-| Datafeeder (feeder.py): NPU does not support tf.FIFOQueue for data buffering and queueing. | Changed to buitlin python queue implementation class:Queue for building training and evaluation queues. During training (in synthesizer/train.py) made code changes to load feed_dict from the python queue before running sess.run  | 
-| data      | Some long data here | more data             | 
-
-FIFOQueue not supported
-
-Dynamic decode 
-
-pythonic way of slicing in tacohelper and tester
-
-For model conv : py_func op is not supported
+| *Datafeeder (feeder.py):* <br/> NPU does not support tf.FIFOQueue for data buffering and queueing. | Changed to buitlin python queue implementation class::Queue for building training and evaluation queues. During training (in synthesizer/train.py) made code changes to load feed_dict based on queue size. If not empty, load the feed_dict with actual queue values else load defined placeholders before passing to sess.run  | 
+| *Dynamic decode (tacotron.py):* <br/> We observed that the tf.dynamic_deocde wrapper is not supported by NPU. Dynamic decode wrapper takes CustomDecoder as input and performs dynamic decoding at each step  | We found tf.while_loop as the replacement for tf.dynamic_decode and was supported by NPU. Implemented tf.while_loop consisting of condition and body functions. The body function outputs the next step, next inputs, outputs, final output and next state. Frames prediction and final decoder state were obtained as outputs from tf.while_loop  | 
+| *Dynamic decode (dynamic_decode_test.py):* <br/> Tf.while_loop successfully worked on NPU but degraded the training performance (~higher steps/sec)  | We modified the tf.dynamic_decode souce code. Replaced the source code logic with our tf.while_loop implementation as stated above. Tested this approach on NPU and drastically improved the training performance  |
+| *Tensor Slicing in TacoTestHelper (helpers.py):* <br/> NPU does not support pythonic way of slicing tensors. For example: next_inputs = outputs[:, -self._output_dim:] | Replaced next_inputs = outputs[:, -self._output_dim:] as next_inputs = tf.slice(outputs, [0, tf.shape(outputs)[1] -self._output_dim], [self._hparams.tacotron_batch_size, self._output_dim])| 
+| *Unsupported tf.py_func operator during Model conversion (change_graph.py):* <br/> tf.py_func takes inputs, split_func function and output float type as inputs and wraps it in the tf graph | Removed py_func operator and logic from the model. Used split_func to get correct tensor dimensions for the placeholders and then used them as input to the model | 
 
 
 
