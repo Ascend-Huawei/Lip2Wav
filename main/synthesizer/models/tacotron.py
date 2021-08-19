@@ -103,25 +103,14 @@ class Tacotron():
         
         #changed 
         
-        print ("training well")
-
         p_inputs = [inputs]
         
         #p_inputs = tf.py_func(split_func, [inputs, split_infos[:, 0]], lout_float)
 
-        #print("p_inputs done ", tf.reshape(tf.concat(1, p_inputs), [ <<a shape>> ])) #p_inputs.set_shape(inputs.shape))
-        
-        #print (type(p_inputs))
-        #p_inputs.set_shape(inputs.shape)
-
         #changes for model conv
-        # model_conv = True
-
-
-        print ("split infos shape : ", split_infos)
-
-        if mel_targets is None:
-            print("test check print")
+	
+#         if mel_targets is None:
+#             print("test check print")
         
         p_mel_targets = tf.py_func(split_func, [mel_targets, split_infos[:, 1]],
                                     lout_float) if mel_targets is not None else mel_targets
@@ -814,8 +803,8 @@ class Tacotron():
             with tf.variable_scope("optimizer") as scope:
                 gradients = optimizer.compute_gradients(self.tower_loss[i])
                 tower_gradients.append(gradients)
-        print("leo_debug")
-        print(tower_gradients)
+        #print("leo_debug")
+        #print(tower_gradients)
         #TODO:
         # 3. Average Gradient
         #with tf.device('/cpu:0'):
