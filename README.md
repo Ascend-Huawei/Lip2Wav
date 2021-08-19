@@ -7,7 +7,7 @@ Deliverable results for NPU training: [README_GPU](https://rnd-gitlab-ca-g.huawe
 
 **NPU Training:**
 
-Dataset Download:
+***Dataset Download:***
 
 Kindly refer to the [README_GPU](https://rnd-gitlab-ca-g.huawei.com/hispark/model_training_hq/-/blob/master/Lip2Wav/1_gpu_training/README_GPU.md) regarding the preprocessed dataset. For 
 
