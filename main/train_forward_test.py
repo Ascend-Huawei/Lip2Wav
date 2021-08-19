@@ -3,7 +3,7 @@ import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 from synthesizer.hparams import hparams, get_image_list
-from synthesizer.rahul_train import tacotron_train
+from synthesizer.train import tacotron_train
 from utils.argutils import print_args
 #from synthesizer import infolog
 import argparse
