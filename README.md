@@ -5,3 +5,5 @@ Deliverable results for NPU training: [README_NPU](https://rnd-gitlab-ca-g.huawe
 
 **[Google Drive link for checkpoint files and .pb files](https://drive.google.com/drive/folders/13dnqFc3WtEFE9dCbvVNQd4q5sDsbFmmF?usp=sharing)**
 
+README: TODO
+
