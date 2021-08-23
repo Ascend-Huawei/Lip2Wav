@@ -35,4 +35,24 @@ bash run_npu_1p.sh
 | *Unsupported tf.py_func operator during Model conversion (change_graph.py):* <br/> tf.py_func takes inputs, split_func function and output float type as inputs and wraps it in the tf graph | Removed py_func operator and logic from the model. Used split_func to get correct tensor dimensions for the placeholders and then used them as input to the model | 
 
 
+ ### Training Performance (NPU vs GPU): 
+ 
+ - We made the above mentioned code changes after using code conversion tool to train on NPU. While training we observed the performance was slower than on GPU (~ x10 slower). 
+ 
+ - We used the [Profiling tool](https://gitee.com/ascend/modelzoo/wikis/%E8%AE%AD%E7%BB%83%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%BC%95(CANN3.2)?sort_id=3652440) to observe which operators were taking the maximum time to execute and also raised following issues on gitee.
+ 
+ - We then used *allow_mix_precision* while training on NPU. *allow_mix_precision:* According to the built-in optimization strategy, the accuracy of some float32 operators can be automatically reduced to float16 for operators of the float32 data type in the entire network, thereby improving system performance and reducing memory usage with a small loss of accuracy. This drastically improved the training performance and had the following observation:
+ 
+ 
+|  |  Average GPU Training (sec/step) | Average NPU Training (sec/step) |
+| --------  | --------  | ------------------- |
+| Without allow_mix_precision  | 1.09 | 13.45 |  
+| With allow_mix_precision  | 1.09 | 1.07 |  
 
+ * allow_mix_precision:* does not apply to GPU training
+
+### Issues raised on Gitee community:
+ 
+- https://gitee.com/ascend/modelzoo/issues/I3VEXH?from=project-issue
+ 
+- https://gitee.com/ascend/modelzoo/issues/I41PZR?from=project-issue
