@@ -49,7 +49,7 @@ bash run_npu_1p.sh
 | Without allow_mix_precision  | 1.09 | 13.45 |  
 | With allow_mix_precision  | 1.09 | 1.07 |  
 
- * allow_mix_precision:* does not apply to GPU training
+ *allow_mix_precision:* does not apply to GPU training
 
 ### Issues raised on Gitee community:
  
