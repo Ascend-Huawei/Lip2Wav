@@ -11,7 +11,7 @@
 **[Evaluation Metric](#evaluation-metric)**
 **[Frozen Graph](#frozen-graph)**
 
-### Checkpoint, .pb, .pbtxt Files 
+### Checkpoint, .pb, .pbtxt, and log Files 
 **[Google Drive link for checkpoint files and .pb files](https://drive.google.com/drive/folders/13dnqFc3WtEFE9dCbvVNQd4q5sDsbFmmF?usp=sharing)**
 
 <hr>
